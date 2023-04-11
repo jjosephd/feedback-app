@@ -1,7 +1,7 @@
 
 import { useState } from "react";
 import Header from "./components/Header";
-
+import FeedbackForm from "./components/FeedbackForm";
 import FeedbackStats from "./components/FeedbackStats";
 import FeedbackList from "./components/FeedbackList";
 import FeedbackData from "./data/feedbackdata"; {/**Pulls data from feedback folder */ }
@@ -25,6 +25,7 @@ In this case, feedback is created as state using FeedbackData which has been imp
         <>
             <Header />
             <div className="container">
+                <FeedbackForm />
                 <FeedbackStats feedback={feedback } />
                 <FeedbackList feedback={feedback} handleDelete={deleteFeedback } />
             </div>
