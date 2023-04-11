@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 function FeedbackStats({ feedback }) {
   //Calculate avg rating score
@@ -7,10 +8,11 @@ function FeedbackStats({ feedback }) {
       return acc + curr.rating;
     }, 0) / feedback.length;
 
+  average = average.toFixed(1).replace(/[.,]0$/, '');
   return (
     <div className="feedback-stats">
       <h4>{feedback.length} Reviews</h4>
-      <h4>Average Feedback Score: {average}</h4>
+      <h4>Average Feedback Score: {isNaN(average) ? '0' : average}</h4>
     </div>
   );
 }
