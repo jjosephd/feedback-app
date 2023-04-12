@@ -3,20 +3,16 @@ import PropTypes from 'prop-types';
 
 const Button = ({ children, version, type, isDisabled }) => {
   return (
-    <button
-      type={type}
-      isDisabled={isDisabled}
-      className={`btn btn-${version}`}
-    >
+    <button type={type} disabled={isDisabled} className={`btn btn-${version}`}>
       {children}
     </button>
   );
 };
 
 Button.defaultProps = {
-  version: 'primary',
+  version: 'secondary',
   type: 'button',
-  isDisabled: false,
+  isDisabled: true,
 };
 
 Button.propTypes = {
