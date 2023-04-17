@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Button from './shared/Button';
 import RatingSelect from './RatingSelect';
 
-const FeedbackForm = () => {
+const FeedbackForm = ({ handleAddition }) => {
   const [text, setText] = useState('');
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState('');
@@ -24,23 +24,45 @@ const FeedbackForm = () => {
     setText(e.target.value);
   };
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    {
+      /**Authenticate amount of characters then construct a newFeedback containing text and rating state */
+    }
+    if (text.trim().length > 10) {
+      const newFeedback = {
+        text,
+        rating,
+      };
+
+      {
+        /**handleAddition function is being called as prop from Feedbackform and being passed newFeedback containing text/rating*/
+      }
+      handleAddition(newFeedback);
+      setText('');
+    }
+  };
+
   return (
     <Card>
-      <h2>Rate your experience:</h2>
-      <RatingSelect />
-      <div className="input-group">
-        <input
-          onChange={handleTextUpdate}
-          type="text"
-          placeholder="Write a Review"
-          value={text}
-        />
+      <form onSubmit={handleSubmit}>
+        <h2>Rate your experience:</h2>
+        <RatingSelect select={(rating) => setRating(rating)} />
+        <div className="input-group">
+          <input
+            onChange={handleTextUpdate}
+            type="text"
+            placeholder="Write a Review"
+            value={text}
+          />
 
-        <Button type="submit" isDisabled={btnDisabled}>
-          Send
-        </Button>
-      </div>
-      {message && <div className="message">{message}</div>}
+          <Button type="submit" isDisabled={btnDisabled}>
+            Send
+          </Button>
+        </div>
+        {/**If message is true then create div with message hook else render nothing*/}
+        {message && <div className="message">{message}</div>}
+      </form>
     </Card>
   );
 };

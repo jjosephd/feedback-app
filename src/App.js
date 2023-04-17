@@ -1,4 +1,4 @@
-
+import { v4 as uuidv4 } from "uuid";
 import { useState } from "react";
 import Header from "./components/Header";
 import FeedbackForm from "./components/FeedbackForm";
@@ -21,11 +21,19 @@ In this case, feedback is created as state using FeedbackData which has been imp
 
     }
 
+    const addFeedback = (newFeedback) => {
+
+        {/**Create unique ID using uuid hook */}
+        newFeedback.id = uuidv4()
+        {/**Create a new array using '...' spread operater that renders previous feedback and placing into array with newFeedback*/}
+        setFeedback([newFeedback, ...feedback])
+    }
+
     return (
         <>
             <Header />
             <div className="container">
-                <FeedbackForm />
+                <FeedbackForm handleAddition={addFeedback } />
                 <FeedbackStats feedback={feedback } />
                 <FeedbackList feedback={feedback} handleDelete={deleteFeedback } />
             </div>
