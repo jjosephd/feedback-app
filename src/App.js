@@ -2,6 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
+import { FeedbackProvider } from './context/FeedbackContext';
 import FeedbackForm from './components/FeedbackForm';
 import FeedbackStats from './components/FeedbackStats';
 import FeedbackList from './components/FeedbackList';
@@ -36,31 +37,30 @@ In this case, feedback is created as state using FeedbackData which has been imp
   };
 
   return (
-    <Router>
-      {/**Using React router v6 library  to create direct route to JSX elements. exact path "/" is typically going to be index/landing page*/}
-      <Header />
-      <div className="container">
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <>
-                <FeedbackForm handleAddition={addFeedback} />
-                <FeedbackStats feedback={feedback} />
-                <FeedbackList
-                  feedback={feedback}
-                  handleDelete={deleteFeedback}
-                />
-              </>
-            }
-          ></Route>
+    <FeedbackProvider>
+      <Router>
+        {/**Using React router v6 library  to create direct route to JSX elements. exact path "/" is typically going to be index/landing page*/}
+        <Header />
+        <div className="container">
+          <Routes>
+            <Route
+              exact
+              path="/"
+              element={
+                <>
+                  <FeedbackForm handleAddition={addFeedback} />
+                  <FeedbackStats />
+                  <FeedbackList handleDelete={deleteFeedback} />
+                </>
+              }
+            ></Route>
 
-          <Route path="/about" element={<AboutPage />} />
-        </Routes>
-        <AboutIconLink></AboutIconLink>
-      </div>
-    </Router>
+            <Route path="/about" element={<AboutPage />} />
+          </Routes>
+          <AboutIconLink></AboutIconLink>
+        </div>
+      </Router>
+    </FeedbackProvider>
   );
 }
 
