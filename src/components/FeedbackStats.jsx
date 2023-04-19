@@ -1,7 +1,7 @@
 import React from 'react';
 import { useContext } from 'react';
-import FeedbackContext from '../context/FeedbackContext';
 import PropTypes from 'prop-types';
+import FeedbackContext from '../context/FeedbackContext';
 
 function FeedbackStats() {
   const { feedback } = useContext(FeedbackContext);
@@ -19,8 +19,5 @@ function FeedbackStats() {
     </div>
   );
 }
-FeedbackStats.propTypes = {
-  feedback: PropTypes.array.isRequired,
-};
 
 export default FeedbackStats;

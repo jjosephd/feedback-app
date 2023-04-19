@@ -1,12 +1,9 @@
-import { v4 as uuidv4 } from 'uuid';
-import { useState } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Header from './components/Header';
 import { FeedbackProvider } from './context/FeedbackContext';
 import FeedbackForm from './components/FeedbackForm';
 import FeedbackStats from './components/FeedbackStats';
 import FeedbackList from './components/FeedbackList';
-import FeedbackData from './data/feedbackdata';
 import AboutPage from './pages/AboutPage';
 import AboutIconLink from './components/AboutIconLink';
 
@@ -16,25 +13,6 @@ function App() {
 
 In this case, feedback is created as state using FeedbackData which has been imported above*/
   }
-
-  const [feedback, setFeedback] = useState(FeedbackData);
-
-  const deleteFeedback = (id) => {
-    if (window.confirm('Are you sure you want to delete')) {
-      setFeedback(feedback.filter((item) => item.id !== id));
-    }
-  };
-
-  const addFeedback = (newFeedback) => {
-    {
-      /**Create unique ID using uuid hook */
-    }
-    newFeedback.id = uuidv4();
-    {
-      /**Create a new array using '...' spread operater that renders previous feedback and placing into array with newFeedback*/
-    }
-    setFeedback([newFeedback, ...feedback]);
-  };
 
   return (
     <FeedbackProvider>
@@ -48,9 +26,9 @@ In this case, feedback is created as state using FeedbackData which has been imp
               path="/"
               element={
                 <>
-                  <FeedbackForm handleAddition={addFeedback} />
+                  <FeedbackForm />
                   <FeedbackStats />
-                  <FeedbackList handleDelete={deleteFeedback} />
+                  <FeedbackList />
                 </>
               }
             ></Route>

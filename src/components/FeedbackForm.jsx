@@ -1,14 +1,18 @@
 import React from 'react';
 import Card from './shared/Card';
 import { useState } from 'react';
+import { useContext } from 'react';
 import Button from './shared/Button';
 import RatingSelect from './RatingSelect';
+import FeedbackContext from '../context/FeedbackContext';
 
-const FeedbackForm = ({ handleAddition }) => {
+const FeedbackForm = () => {
   const [text, setText] = useState('');
   const [btnDisabled, setBtnDisabled] = useState(true);
   const [message, setMessage] = useState('');
   const [rating, setRating] = useState(10);
+
+  const { addFeedback } = useContext(FeedbackContext);
 
   const handleTextUpdate = (e) => {
     if (text === '') {
@@ -35,10 +39,7 @@ const FeedbackForm = ({ handleAddition }) => {
         rating,
       };
 
-      {
-        /**handleAddition function is being called as prop from Feedbackform and being passed newFeedback containing text/rating*/
-      }
-      handleAddition(newFeedback);
+      addFeedback(newFeedback);
       setText('');
     }
   };
